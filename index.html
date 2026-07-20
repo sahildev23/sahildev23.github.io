@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sahil Devulapalli — Data Science &amp; AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0F14;
+    --surface:#111820;
+    --surface-2:#161f29;
+    --line:#232d38;
+    --text:#E9ECEF;
+    --text-dim:#8B96A5;
+    --text-faint:#5B6674;
+    --brass:#C9A45C;
+    --brass-dim:#9c814a;
+    --maroon:#7C3F58;
+    --teal:#4E8C86;
+    --radius:2px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--brass); color:#0B0F14;}
+
+  a{color:inherit; text-decoration:none;}
+
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--brass);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px;
+    background:var(--brass-dim);
+    display:inline-block;
+  }
+
+  h1,h2,h3{font-family:'Spectral',serif; font-weight:600; color:var(--text);}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,15,20,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1120px; margin:0 auto; padding:18px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-name{
+    font-family:'JetBrains Mono',monospace;
+    font-size:14px;
+    letter-spacing:0.04em;
+    color:var(--text);
+  }
+  .nav-name span{color:var(--brass);}
+  .nav-links{display:flex; gap:30px; font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:0.04em;}
+  .nav-links a{color:var(--text-dim); transition:color .2s;}
+  .nav-links a:hover{color:var(--brass);}
+  .nav-links{}
+  @media (max-width:720px){
+    .nav-links{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 64px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; top:-200px; right:-200px;
+    width:520px; height:520px;
+    background:radial-gradient(circle, rgba(201,164,92,0.09), transparent 70%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:56px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:56px;
+    line-height:1.05;
+    margin:18px 0 6px;
+    letter-spacing:-0.01em;
+  }
+  .hero .role{
+    font-family:'JetBrains Mono',monospace;
+    font-size:15px;
+    color:var(--text-dim);
+    margin-bottom:22px;
+  }
+  .hero .role em{
+    font-style:normal;
+    color:var(--teal);
+  }
+  .hero p.lede{
+    max-width:520px;
+    color:var(--text-dim);
+    font-size:16.5px;
+    margin-bottom:30px;
+  }
+  .hero-links{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:0.04em;
+    padding:12px 20px;
+    border:1px solid var(--brass-dim);
+    color:var(--brass);
+    border-radius:var(--radius);
+    transition:all .2s;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn:hover{background:var(--brass); color:#0B0F14; border-color:var(--brass);}
+  .btn.ghost{border-color:var(--line); color:var(--text-dim);}
+  .btn.ghost:hover{border-color:var(--text-dim); color:var(--text); background:transparent;}
+
+  .portrait-wrap{
+    position:relative;
+    justify-self:end;
+  }
+  .portrait-frame{
+    width:280px; height:340px;
+    position:relative;
+    border:1px solid var(--line);
+    padding:10px;
+  }
+  .portrait-frame::before{
+    content:"";
+    position:absolute; top:-1px; left:-1px;
+    width:26px; height:26px;
+    border-top:2px solid var(--brass);
+    border-left:2px solid var(--brass);
+  }
+  .portrait-frame::after{
+    content:"";
+    position:absolute; bottom:-1px; right:-1px;
+    width:26px; height:26px;
+    border-bottom:2px solid var(--brass);
+    border-right:2px solid var(--brass);
+  }
+  .portrait-frame img{
+    width:100%; height:100%;
+    object-fit:cover;
+    filter:grayscale(35%) contrast(1.05);
+    display:block;
+  }
+  .portrait-cap{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--text-faint);
+    letter-spacing:0.06em;
+    margin-top:10px;
+    text-align:right;
+  }
+
+  /* ---------- METRICS STRIP (signature element) ---------- */
+  .metrics{
+    border-bottom:1px solid var(--line);
+    background:var(--surface);
+    overflow:hidden;
+  }
+  .metrics-track{
+    display:flex;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    white-space:nowrap;
+    animation:scroll 32s linear infinite;
+  }
+  .metrics:hover .metrics-track{animation-play-state:paused;}
+  @keyframes scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+  .metric-item{
+    display:flex; align-items:center; gap:10px;
+    padding:16px 34px;
+    border-right:1px solid var(--line);
+    color:var(--text-dim);
+  }
+  .metric-item .val{color:var(--brass); font-weight:600;}
+  .metric-item .dot{width:6px; height:6px; border-radius:50%; background:var(--teal); flex:none;}
+
+  /* ---------- SECTION ---------- */
+  section{padding:80px 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .section-head{margin-bottom:44px;}
+  .section-head h2{font-size:32px; margin-top:14px;}
+
+  /* ---------- EXPERIENCE ---------- */
+  .xp-item{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:36px;
+    padding:30px 0;
+    border-top:1px solid var(--line);
+  }
+  .xp-item:first-of-type{border-top:none;}
+  .xp-meta{font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--text-faint);}
+  .xp-meta .company{color:var(--text); font-size:15px; font-family:'Spectral',serif; font-weight:600; display:block; margin-bottom:4px;}
+  .xp-role{font-size:15px; color:var(--brass); margin-bottom:10px; font-weight:500;}
+  .xp-body ul{list-style:none;}
+  .xp-body li{
+    position:relative;
+    padding-left:20px;
+    color:var(--text-dim);
+    font-size:15px;
+    margin-bottom:10px;
+  }
+  .xp-body li::before{
+    content:"→";
+    position:absolute; left:0; color:var(--teal);
+    font-size:13px;
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .proj-card{
+    background:var(--surface);
+    padding:32px;
+  }
+  .proj-card h3{font-size:19px; margin-bottom:14px; color:var(--text);}
+  .proj-card ul{list-style:none;}
+  .proj-card li{
+    position:relative; padding-left:18px;
+    color:var(--text-dim); font-size:14.5px; margin-bottom:10px;
+  }
+  .proj-card li::before{content:"—"; position:absolute; left:0; color:var(--brass-dim);}
+  .proj-tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+  .tag{
+    font-family:'JetBrains Mono',monospace; font-size:11px;
+    color:var(--teal); border:1px solid rgba(78,140,134,0.35);
+    padding:4px 9px; border-radius:2px;
+  }
+
+  /* ---------- LEADERSHIP ---------- */
+  .lead-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .lead-card{border:1px solid var(--line); padding:26px; background:var(--surface);}
+  .lead-card .org{font-family:'Spectral',serif; font-weight:600; font-size:17px; margin-bottom:2px;}
+  .lead-card .role{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--brass); margin-bottom:14px; display:block;}
+  .lead-card p{color:var(--text-dim); font-size:14px; margin-bottom:8px;}
+  .lead-card.has-photo{padding:0; overflow:hidden;}
+  .lead-card.has-photo .photo{width:100%; height:170px; overflow:hidden;}
+  .lead-card.has-photo .photo img{width:100%; height:100%; object-fit:cover; filter:grayscale(20%) contrast(1.05); display:block; transition:filter .3s;}
+  .lead-card.has-photo:hover .photo img{filter:grayscale(0%) contrast(1.05);}
+  .lead-card.has-photo .card-body{padding:22px 26px 26px;}
+
+  .photo-gallery{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:20px;}
+  .photo-gallery .g-item{border:1px solid var(--line); overflow:hidden; aspect-ratio:4/3;}
+  .photo-gallery .g-item img{width:100%; height:100%; object-fit:cover; filter:grayscale(20%) contrast(1.05); display:block; transition:filter .3s;}
+  .photo-gallery .g-item:hover img{filter:grayscale(0%) contrast(1.05);}
+  .photo-gallery .contact-tile{
+    background:var(--surface-2);
+    border-color:var(--brass-dim);
+    padding:18px 20px;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .contact-tile .contact-links{display:flex; flex-direction:column; gap:8px; font-family:'JetBrains Mono',monospace; font-size:12.5px;}
+  .contact-tile .contact-links a{color:var(--text-dim); border-bottom:1px solid transparent; padding-bottom:1px; width:fit-content; transition:all .2s;}
+  .contact-tile .contact-links a:hover{color:var(--brass); border-color:var(--brass-dim);}
+  @media (max-width:720px){ .photo-gallery{grid-template-columns:1fr 1fr;} }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  .skill-cat h3{font-family:'JetBrains Mono',monospace; font-weight:500; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; color:var(--brass); margin-bottom:16px;}
+  .skill-list{display:flex; flex-wrap:wrap; gap:9px;}
+  .skill-pill{
+    font-size:13.5px; color:var(--text-dim);
+    border:1px solid var(--line);
+    padding:7px 13px;
+    transition:all .2s;
+  }
+  .skill-pill:hover{border-color:var(--brass-dim); color:var(--text);}
+
+  /* ---------- EDUCATION ---------- */
+  .edu-box{
+    border:1px solid var(--line);
+    padding:36px;
+    background:var(--surface);
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:20px;
+  }
+  .edu-box h3{font-size:22px; margin-bottom:6px;}
+  .edu-box .sub{color:var(--text-dim); font-size:14.5px; margin-bottom:16px;}
+  .edu-box .gpa{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--brass);
+    text-align:right; align-self:start;
+  }
+  .coursework{font-size:13.5px; color:var(--text-faint); line-height:1.7;}
+  .coursework span{color:var(--text-dim);}
+
+  /* ---------- FOOTER / CONTACT ---------- */
+  footer{padding:80px 0 50px;}
+  .contact-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:40px; align-items:end;}
+  footer h2{font-size:34px; max-width:480px; margin-top:14px;}
+  .contact-links{display:flex; flex-direction:column; gap:14px; font-family:'JetBrains Mono',monospace; font-size:14px;}
+  .contact-links a{color:var(--text-dim); border-bottom:1px solid transparent; padding-bottom:2px; width:fit-content; transition:all .2s;}
+  .contact-links a:hover{color:var(--brass); border-color:var(--brass-dim);}
+  .foot-note{margin-top:60px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--text-faint); display:flex; justify-content:space-between; border-top:1px solid var(--line); padding-top:24px;}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .portrait-wrap{justify-self:start;}
+    .hero h1{font-size:38px;}
+    .xp-item{grid-template-columns:1fr;}
+    .proj-grid{grid-template-columns:1fr;}
+    .lead-grid{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:1fr;}
+    .edu-box{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-name">SAHIL<span>.</span>DEVULAPALLI</div>
+    <nav class="nav-links">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#interests">Interests</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Data Science · AI Engineering</div>
+      <h1>Sahil Devulapalli</h1>
+      <div class="role">Building <em>AI pipelines</em> and <em>data systems</em> that turn raw signal into decisions.</div>
+      <p class="lede">B.S. Data Science candidate at the University of Michigan, currently shipping enterprise AI applications at AThingz. I work across the stack — from anomaly detection models to the dashboards that make them usable.</p>
+      <div class="hero-links">
+        <a class="btn" href="mailto:sahildev@umich.edu">Email me →</a>
+        <a class="btn ghost" href="https://linkedin.com/in/sahil-devulapalli" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/sahildev23" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="portrait-wrap">
+      <div class="portrait-frame">
+        <img src="headshot.png" alt="Portrait of Sahil Devulapalli">
+      </div>
+      <div class="portrait-cap">Ann Arbor, MI / 248-525-0417</div>
+    </div>
+  </div>
+</section>
+
+<div class="metrics">
+  <div class="metrics-track" id="metricsTrack">
+    <!-- duplicated in JS for seamless loop -->
+  </div>
+</div>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Experience</div>
+      <h2>Where I've worked</h2>
+    </div>
+
+    <div class="xp-item">
+      <div class="xp-meta">
+        <span class="company">AThingz</span>
+        Southfield, MI<br>May 2026 – Aug 2026
+      </div>
+      <div class="xp-body">
+        <div class="xp-role">AI Software Engineering Intern</div>
+        <ul>
+          <li>Developed enterprise AI applications using Python, Django, Azure AI Foundry, Azure OpenAI, Microsoft Graph API, SharePoint API, Azure SQL Database, Azure Blob Storage, Pandas, and Parquet to automate supply chain and logistics operations.</li>
+          <li>Designed end-to-end AI pipelines that extracted, validated, transformed, and stored structured shipment data from client emails and attached documents, integrating LLMs, SQL databases, cloud storage, and ETL workflows for automated processing and analytics.</li>
+          <li>Built a full-stack shipment management platform with Django featuring secure authentication, searchable shipment records, analytics dashboards, REST API integration, and real-time operational insights, improving shipment visibility and workflow efficiency across internal teams.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Projects</div>
+      <h2>Things I've built</h2>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <h3>Cyber Threat Detection using Machine Learning</h3>
+        <ul>
+          <li>Implemented anomaly detection pipelines using Isolation Forests and PCA to identify suspicious behavior in 1M+ network log events, achieving 92% recall on attack patterns.</li>
+          <li>Engineered temporal features including rolling event counts and anomaly rates to improve detection sensitivity.</li>
+          <li>Built a Streamlit dashboard to visualize risk scores, anomaly trends, and alert thresholds for rapid incident triage.</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="tag">Isolation Forests</span>
+          <span class="tag">PCA</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">Python</span>
+        </div>
+      </div>
+      <div class="proj-card">
+        <h3>Personal Finance Tracker</h3>
+        <ul>
+          <li>Processed and standardized 5,000+ nonprofit financial transactions into clean, structured datasets with normalized categories and timestamps for anomaly detection and spending insights.</li>
+          <li>Implemented ARIMA and Prophet models to forecast monthly expenses, reducing prediction error by 22%.</li>
+          <li>Designed dashboards using monthly spend timelines, category-wise variance plots, and anomaly flags to identify outliers and long-term budget risk.</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="tag">ARIMA</span>
+          <span class="tag">Prophet</span>
+          <span class="tag">Data Cleaning</span>
+          <span class="tag">Forecasting</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="leadership">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Leadership</div>
+      <h2>Outside the classroom</h2>
+    </div>
+    <div class="lead-grid">
+      <div class="lead-card">
+        <div class="org">Michigan Sports Analytics Society</div>
+        <span class="role">Data Analyst · Ann Arbor, MI · 2024 – Present</span>
+        <p>Analyzed player and team performance data using Python (Pandas, NumPy) to identify trends and predictive metrics across multiple seasons, generating actionable insights for strategy and player evaluation.</p>
+        <p>Collaborated with peers to build visualizations in Tableau and Matplotlib, communicating insights to audiences.</p>
+      </div>
+      <div class="lead-card">
+        <div class="org">Michigan AI Strategy Club</div>
+        <span class="role">Vice President · Ann Arbor, MI · 2024 – Present</span>
+        <p>Lead initiatives to explore real-world applications of AI across industries including finance, healthcare, and logistics.</p>
+        <p>Organize workshops and events to help members build practical AI skills and stay updated on emerging trends.</p>
+      </div>
+      <div class="lead-card">
+        <div class="org">Investing4Youth</div>
+        <span class="role">Co-President, Co-Founder · Novi, MI · 2020 – Present</span>
+        <p>Co-founded a nonprofit promoting educational equity; raised $3,500+ by analyzing donor outreach data, extracting actionable insights, and optimizing fundraising strategy for maximum impact.</p>
+        <p>Built the organization's website with analytics dashboards, increasing traffic 40% and securing 5+ partners and 10+ fundraisers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Skills</div>
+      <h2>Toolkit</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <h3>Programming &amp; Software Development</h3>
+        <div class="skill-list">
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">Java</span>
+          <span class="skill-pill">C++</span>
+          <span class="skill-pill">SQL</span>
+          <span class="skill-pill">MATLAB</span>
+          <span class="skill-pill">Django</span>
+          <span class="skill-pill">OOP</span>
+          <span class="skill-pill">Data Structures</span>
+          <span class="skill-pill">Algorithms</span>
+          <span class="skill-pill">Full-Stack Development</span>
+          <span class="skill-pill">Backend Development</span>
+          <span class="skill-pill">REST APIs</span>
+          <span class="skill-pill">API Integration</span>
+          <span class="skill-pill">JSON</span>
+          <span class="skill-pill">Authentication</span>
+          <span class="skill-pill">Git</span>
+          <span class="skill-pill">GitHub</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3>AI, Data &amp; Cloud Technologies</h3>
+        <div class="skill-list">
+          <span class="skill-pill">Azure AI Foundry</span>
+          <span class="skill-pill">Azure OpenAI</span>
+          <span class="skill-pill">Prompt Engineering</span>
+          <span class="skill-pill">LLM Applications</span>
+          <span class="skill-pill">Pandas</span>
+          <span class="skill-pill">NumPy</span>
+          <span class="skill-pill">scikit-learn</span>
+          <span class="skill-pill">Azure SQL Database</span>
+          <span class="skill-pill">Azure Blob Storage</span>
+          <span class="skill-pill">Microsoft Graph API</span>
+          <span class="skill-pill">SharePoint API</span>
+          <span class="skill-pill">Parquet</span>
+          <span class="skill-pill">ETL Pipelines</span>
+          <span class="skill-pill">Data Engineering</span>
+          <span class="skill-pill">Database Design</span>
+          <span class="skill-pill">Data Validation</span>
+          <span class="skill-pill">Tableau</span>
+          <span class="skill-pill">Power BI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Education</div>
+      <h2>Academic background</h2>
+    </div>
+    <div class="edu-box">
+      <div>
+        <h3>University of Michigan — College of Literature, Science &amp; Arts</h3>
+        <div class="sub">B.S. in Data Science, Minor in Computer Science · Ann Arbor, MI · Aug. 2024 – May 2028</div>
+        <div class="coursework">
+          <span>Certified in Cybersecurity (CC) – (ISC)², July 2026.</span><br><br>
+          <span>Cybersecurity Knowledge:</span> Security Principles, Business Continuity, Disaster Recovery &amp; Incident Response, Access Controls, Network Security, Security Operations.<br><br>
+          <span>Relevant Coursework:</span> Data Structures &amp; Algorithms, Discrete Mathematics, Probability and Statistics, Software/Hardware/IoT, Linear Algebra, Calculus III, Programming &amp; Data Science.
+        </div>
+      </div>
+      <div class="gpa">GPA<br>3.66 / 4.0</div>
+    </div>
+  </div>
+</section>
+
+<section id="interests">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Off the Clock</div>
+      <h2>Beyond the data</h2>
+    </div>
+    <div class="lead-grid">
+      <div class="lead-card has-photo">
+        <div class="photo"><img src="basketball.jpg" alt="Sahil with the Novi varsity basketball team"></div>
+        <div class="card-body">
+          <div class="org">Varsity Basketball</div>
+          <span class="role">Player</span>
+          <p>Competed at the varsity level — brought the same discipline and teamwork to the court that I bring to a codebase.</p>
+        </div>
+      </div>
+      <div class="lead-card">
+        <div class="org">Beyond</div>
+        <span class="role">Manager</span>
+        <p>Managed day-to-day operations and staff, building the same organizational instincts I now apply to running projects and teams.</p>
+      </div>
+      <div class="lead-card">
+        <div class="org">The Garage Fuel &amp; Grill Bar</div>
+        <span class="role">Line Cook</span>
+        <p>Worked the line during high-volume rushes — a crash course in staying calm and precise under pressure.</p>
+      </div>
+    </div>
+    <div class="skill-cat" style="margin-top:32px;">
+      <h3>Also Into</h3>
+      <div class="skill-list">
+        <span class="skill-pill">Weightlifting &amp; the Gym</span>
+        <span class="skill-pill">Sightseeing</span>
+        <span class="skill-pill">Hiking</span>
+      </div>
+      <div class="photo-gallery">
+        <div class="g-item"><img src="hike1.jpg" alt="Hiking with friends in Banff"></div>
+        <div class="g-item"><img src="hike2.jpg" alt="Sightseeing at Lake Louise"></div>
+        <div class="g-item"><img src="hike3.png" alt="Overlooking the mountains in Banff"></div>
+        <div class="g-item contact-tile" id="contact">
+          <div class="eyebrow" style="margin-bottom:10px;">Contact</div>
+          <div class="contact-links">
+            <a href="mailto:sahildev@umich.edu">sahildev@umich.edu</a>
+            <a href="tel:2485250417">248-525-0417</a>
+            <a href="https://linkedin.com/in/sahil-devulapalli" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/sahildev23" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-note">
+      <span>Sahil Devulapalli — Ann Arbor, MI</span>
+      <span>Built for review, updated 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const metrics = [
+    {val:"92%", label:"recall on 1M+ network log events"},
+    {val:"22%", label:"lower expense-forecast error via ARIMA/Prophet"},
+    {val:"$3,500+", label:"raised for Investing4Youth"},
+    {val:"40%", label:"traffic increase on nonprofit site"},
+    {val:"5,000+", label:"transactions cleaned & structured"},
+    {val:"3.66/4.0", label:"GPA, B.S. Data Science, U-M"},
+    {val:"10+", label:"fundraisers secured"},
+  ];
+  const track = document.getElementById('metricsTrack');
+  function buildItems(){
+    return metrics.map(m => `<div class="metric-item"><span class="dot"></span><span class="val">${m.val}</span>&nbsp;${m.label}</div>`).join('');
+  }
+  track.innerHTML = buildItems() + buildItems();
+</script>
+
+</body>
+</html>
