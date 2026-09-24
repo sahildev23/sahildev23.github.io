@@ -167,7 +167,6 @@
   .portrait-frame img{
     width:100%; height:100%;
     object-fit:cover;
-    object-position: center 20%;
     filter:grayscale(35%) contrast(1.05);
     display:block;
   }
@@ -212,43 +211,6 @@
   section:last-of-type{border-bottom:none;}
   .section-head{margin-bottom:44px;}
   .section-head h2{font-size:32px; margin-top:14px;}
-  .coming-soon{
-    font-family:'JetBrains Mono',monospace;
-    font-size:12.5px;
-    color:var(--text-faint);
-    margin-top:10px;
-    letter-spacing:0.02em;
-  }
-
-  .pre-college-note{
-    border-top:1px solid var(--line);
-    padding-top:22px;
-    margin-top:8px;
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-  }
-  .pre-college-note ul{list-style:none; display:flex; flex-direction:column; gap:9px;}
-  .pre-college-note li{
-    position:relative;
-    padding-left:20px;
-    color:var(--text-dim);
-    font-size:14.5px;
-  }
-  .pre-college-note li::before{
-    content:"→";
-    position:absolute; left:0; color:var(--teal);
-    font-size:13px;
-  }
-
-  .cert-row{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    margin-bottom:20px;
-  }
-  .cert-badge{width:56px; height:56px; flex:none;}
-  .cert-row span{color:var(--text); font-size:14.5px;}
 
   /* ---------- EXPERIENCE ---------- */
   .xp-item{
@@ -404,7 +366,7 @@
       <div class="eyebrow">Data Science · AI Engineering</div>
       <h1>Sahil Devulapalli</h1>
       <div class="role">Building <em>AI pipelines</em> and <em>data systems</em> that turn raw signal into decisions.</div>
-      <p class="lede">B.S. Data Science candidate at the University of Michigan, currently shipping enterprise AI applications at AThingz. I work across the stack — from anomaly detection models to the dashboards that make them usable.</p>
+      <p class="lede">B.S. Data Science candidate at the University of Michigan who shipped enterprise AI applications at AThingz this past summer. I work across the stack — from anomaly detection models to the dashboards that make them usable.</p>
       <div class="hero-links">
         <a class="btn" href="mailto:sahildev@umich.edu">Email me →</a>
         <a class="btn ghost" href="https://linkedin.com/in/sahil-devulapalli" target="_blank" rel="noopener">LinkedIn</a>
@@ -436,25 +398,16 @@
     <div class="xp-item">
       <div class="xp-meta">
         <span class="company">AThingz</span>
-        Southfield, MI<br>May 2026 – Aug 2026
+        Southfield, MI<br>June 2026 – Aug. 2026
       </div>
       <div class="xp-body">
-        <div class="xp-role">AI Software Engineering Intern</div>
+        <div class="xp-role">AI &amp; Data Engineering Intern</div>
         <ul>
-          <li>Developed enterprise AI applications using Python, Django, Azure AI Foundry, Azure OpenAI, Microsoft Graph API, SharePoint API, Azure SQL Database, Azure Blob Storage, Pandas, and Parquet to automate supply chain and logistics operations.</li>
-          <li>Designed end-to-end AI pipelines that extracted, validated, transformed, and stored structured shipment data from client emails and attached documents, integrating LLMs, SQL databases, cloud storage, and ETL workflows for automated processing and analytics.</li>
-          <li>Built a full-stack shipment management platform with Django featuring secure authentication, searchable shipment records, analytics dashboards, REST API integration, and real-time operational insights, improving shipment visibility and workflow efficiency across internal teams.</li>
+          <li>Developed two enterprise AI systems using Python, Django, Azure AI Foundry, Azure OpenAI, Microsoft Graph API, SharePoint API, Azure SQL Database, Azure Blob Storage, Pandas, and Parquet, reducing daily manual review time by 50% across supply chain and logistics operations.</li>
+          <li>Designed an autonomous email-to-data pipeline that extracted, validated, transformed, and stored structured shipment data using LLMs, processing 120+ shipments over 3 months, then built a full-stack Django shipment management platform with secure authentication, analytics dashboards, and customer self-service shipment entry that increased total shipment volume by 18%.</li>
+          <li>Translated supply-chain requirements into deployable data and decision systems, delivering validated solutions for intelligent shipment processing and multi-objective constraint optimization across 2,300+ real-world shipments.</li>
         </ul>
       </div>
-    </div>
-
-    <div class="pre-college-note">
-      <span class="eyebrow" style="margin-bottom:8px;">Prior Experience</span>
-      <ul>
-        <li>Manager / Barista, Beyond Juicery &amp; Eatery</li>
-        <li>Sales Associate, Party City</li>
-        <li>Line Cook, Garage Grill &amp; Fuel Bar</li>
-      </ul>
     </div>
   </div>
 </section>
@@ -464,9 +417,36 @@
     <div class="section-head">
       <div class="eyebrow">Projects</div>
       <h2>Things I've built</h2>
-      <p class="coming-soon">More projects coming soon…</p>
     </div>
     <div class="proj-grid">
+      <div class="proj-card">
+        <h3>Multi-Objective Dock Scheduling &amp; Re-Optimization Engine</h3>
+        <ul>
+          <li>Modeled plant operations as a constraint-programming system generating truck–door–time assignments from multi-table SQL data, enforcing ownership, compatibility, operating windows, durations, closures, and zero overlap.</li>
+          <li>Built optimization infrastructure with five-level lexicographic objectives, dependency-graph neighborhood expansion, and incremental re-optimization.</li>
+          <li>Optimized 2,376 trucks across 513K+ candidate assignments, verified with 136 automated tests.</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="tag">Constraint Programming</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Optimization</span>
+          <span class="tag">Python</span>
+        </div>
+      </div>
+      <div class="proj-card">
+        <h3>LLM-Powered Shipment Data Engineering Platform</h3>
+        <ul>
+          <li>Built an autonomous email-to-data pipeline that processed 120+ shipments over 3 months, parsing LLM responses into strict nested schemas.</li>
+          <li>Persisted validated records with full audit trails to cloud storage; migrated prototype SQLite workflows to enterprise SQL with normalized tables and automated ETL scheduling.</li>
+          <li>Launched customer self-service shipment entry through a Django app, increasing total shipment volume by 18%.</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="tag">LLM</span>
+          <span class="tag">ETL</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Django</span>
+        </div>
+      </div>
       <div class="proj-card">
         <h3>Cyber Threat Detection using Machine Learning</h3>
         <ul>
@@ -509,7 +489,7 @@
       <div class="lead-card">
         <div class="org">Michigan Sports Analytics Society</div>
         <span class="role">Data Analyst · Ann Arbor, MI · 2024 – Present</span>
-        <p>Analyzed player and team performance data using Python (Pandas, NumPy) to identify trends and predictive metrics across multiple seasons, generating actionable insights for strategy and player evaluation.</p>
+        <p>Trained predictive models using Python (scikit-learn, Pandas, NumPy) on player and team performance data, improving prediction accuracy for team statistics by 17% and generating actionable insights for strategy and player evaluation across multiple seasons.</p>
         <p>Collaborated with peers to build visualizations in Tableau and Matplotlib, communicating insights to audiences.</p>
       </div>
       <div class="lead-card">
@@ -567,6 +547,7 @@
           <span class="skill-pill">Pandas</span>
           <span class="skill-pill">NumPy</span>
           <span class="skill-pill">scikit-learn</span>
+          <span class="skill-pill">PyTorch</span>
           <span class="skill-pill">Azure SQL Database</span>
           <span class="skill-pill">Azure Blob Storage</span>
           <span class="skill-pill">Microsoft Graph API</span>
@@ -594,13 +575,11 @@
       <div>
         <h3>University of Michigan — College of Literature, Science &amp; Arts</h3>
         <div class="sub">B.S. in Data Science, Minor in Computer Science · Ann Arbor, MI · Aug. 2024 – May 2028</div>
-        <div class="cert-row">
-          <img src="cc-badge.png" alt="ISC2 Certified in Cybersecurity (CC) badge" class="cert-badge">
-          <span>Certified in Cybersecurity (CC) – (ISC)², July 2026.</span>
-        </div>
         <div class="coursework">
+          <span>Certified in Cybersecurity (CC) – (ISC)², July 2026.</span><br>
+          <span>AWS Certification (Pursuing) – Expected May 2027.</span><br><br>
           <span>Cybersecurity Knowledge:</span> Security Principles, Business Continuity, Disaster Recovery &amp; Incident Response, Access Controls, Network Security, Security Operations.<br><br>
-          <span>Relevant Coursework:</span> Data Structures &amp; Algorithms, Discrete Mathematics, Probability and Statistics, Software/Hardware/IoT, Linear Algebra, Calculus III, Programming &amp; Data Science.
+          <span>Relevant Coursework:</span> Data Structures &amp; Algorithms, Discrete Mathematics, Probability and Statistics, Database Management Systems, Software/Hardware/IoT, Linear Algebra, Calculus III, Programming &amp; Data Science.
         </div>
       </div>
       <div class="gpa">GPA<br>3.66 / 4.0</div>
@@ -672,6 +651,10 @@
   const metrics = [
     {val:"92%", label:"recall on 1M+ network log events"},
     {val:"22%", label:"lower expense-forecast error via ARIMA/Prophet"},
+    {val:"17%", label:"lift in prediction accuracy at MSAS"},
+    {val:"50%", label:"cut in manual review time at AThingz"},
+    {val:"120+", label:"shipments processed via automated pipeline"},
+    {val:"18%", label:"increase in shipment volume from self-service"},
     {val:"$3,500+", label:"raised for Investing4Youth"},
     {val:"40%", label:"traffic increase on nonprofit site"},
     {val:"5,000+", label:"transactions cleaned & structured"},
